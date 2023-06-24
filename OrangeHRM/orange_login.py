@@ -14,7 +14,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
-def login():
+def orangeTest():
     # Step 1: launch browser
     driver = webdriver.Chrome()
     driver.maximize_window()
@@ -48,13 +48,24 @@ def login():
     country = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.CSS_SELECTOR,
                                                                                 "#app > div.oxd-layout > div.oxd-layout-container > div.oxd-layout-context > div > div > div > div.orangehrm-edit-employee-content > div.orangehrm-horizontal-padding.orangehrm-vertical-padding > form > div:nth-child(5) > div:nth-child(1) > div:nth-child(1) > div > div:nth-child(2) > div > div > div.oxd-select-text-input")))
     country.click()
-
     while country.text != "Bangladeshi":
         country.send_keys(Keys.ARROW_DOWN)
-
     country.send_keys(Keys.ENTER)
+
+    # date of Birth
+    dob = WebDriverWait(driver, 10).until(
+        EC.visibility_of_element_located(
+            (By.CSS_SELECTOR, ".orangehrm-edit-employee-content .oxd-form-row:nth-child(5) [placeholder]")))
+    dob.send_keys(Keys.CONTROL + 'a')
+    dob.send_keys(Keys.BACKSPACE)
+    dob.send_keys("2020-12-01")
+
+    # Gender
+    gender_female = WebDriverWait(driver, 10).until(
+        EC.visibility_of_element_located((By.CSS_SELECTOR, "#app > div.oxd-layout > div.oxd-layout-container > div.oxd-layout-context > div > div > div > div.orangehrm-edit-employee-content > div.orangehrm-horizontal-padding.orangehrm-vertical-padding > form > div:nth-child(5) > div:nth-child(2) > div:nth-child(2) > div > div.--gender-grouped-field > div:nth-child(2) > div:nth-child(2) > div > label > span")))
+    gender_female.click()
 
     time.sleep(10)
 
 
-login()
+orangeTest()
